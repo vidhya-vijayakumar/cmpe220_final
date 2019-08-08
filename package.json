@@ -1,0 +1,40 @@
+{
+  "name": "prototype_final",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^3.3.7",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
+    "connect-mongodb-session": "^2.0.5",
+    "express": "^4.17.1",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.16.2",
+    "express-validator": "^5.3.1",
+    "jade": "^1.11.0",
+    "line-reader": "^0.4.0",
+    "linereader": "^1.1.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.6.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidhya-vijayakumar/CMPE280.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vidhya-vijayakumar/CMPE280/issues"
+  },
+  "homepage": "https://github.com/vidhya-vijayakumar/CMPE280#readme",
+  "description": ""
+}

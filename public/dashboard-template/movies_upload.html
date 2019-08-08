@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IOT Dashboard</title>
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+     <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><strong>Dashboard</strong></a>
+                <a class="navbar-brand" ></a>
+                <a class="navbar-brand" href="/">Home</a>
+                <a class="navbar-brand" ></a>
+                <a class="navbar-brand" href="/users/logout">Logout</a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <!-- /.dropdown -->
+                 
+                </li>
+                <!-- /.dropdown -->
+                
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+    
+					<li>
+                        <a href="chart.html" class="active-menu"><i class="fa fa-bar-chart-o"></i> Fighters Details</a>
+                    </li>
+         
+                </ul>
+
+            </div>
+
+            <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script>
+
+            <script type="text/javascript">
+            AWS.config.update({
+              region: "us-west-2",
+              endpoint: 'http://localhost:8000',
+              // accessKeyId default can be used while using the downloadable version of DynamoDB. 
+              // For security reasons, do not store AWS Credentials in your files. Use Amazon Cognito instead.
+              accessKeyId: "fakeMyKeyId",
+              // secretAccessKey default can be used while using the downloadable version of DynamoDB. 
+              // For security reasons, do not store AWS Credentials in your files. Use Amazon Cognito instead.
+              secretAccessKey: "fakeSecretAccessKey"
+            });
+            var docClient = new AWS.DynamoDB.DocumentClient();
+
+function processFile(evt) {
+    document.getElementById('textarea').innerHTML = "";
+    document.getElementById('textarea').innerHTML += "Importing Data into DynamoDB. Please wait..." + "\n";
+    var file = evt.target.files[0];
+    if (file) {
+        var r = new FileReader();
+        r.onload = function(e) {
+            var contents = e.target.result;
+            var allMovies = JSON.parse(contents);
+
+            allMovies.forEach(function (movie) {
+                document.getElementById('textarea').innerHTML += "Processing: " + movie.title + "\n";
+                var params = {
+                    TableName: "Movies",
+                    Item: {
+                        "year": movie.year,
+                        "title": movie.title,
+                        "info": movie.info
+                    }
+                };
+                docClient.put(params, function (err, data) {
+                    if (err) {
+                        document.getElementById('textarea').innerHTML += "Unable to add movie: " + count + movie.title + "\n";
+                        document.getElementById('textarea').innerHTML += "Error JSON: " + JSON.stringify(err) + "\n";
+                    } else {
+                        document.getElementById('textarea').innerHTML += "PutItem succeeded: " + movie.title + "\n";
+                        textarea.scrollTop = textarea.scrollHeight;
+                    }
+                });
+            });
+    };
+        r.readAsText(file);
+    } else {
+        alert("Could not read movie data file");
+    }
+}
+
+</script>
+</head>
+
+<body>
+<input type="file" id="fileinput" accept='application/json'/>
+<br><br>
+<textarea readonly id= "textarea" style="width:400px; height:800px"></textarea>
+
+<script>
+    document.getElementById('fileinput').addEventListener('change', processFile, false);
+</script>
+</body>
+</html>
+

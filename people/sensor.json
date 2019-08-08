@@ -1,0 +1,14 @@
+[
+    {
+        "year": "54:6c:0e:46:44:84",
+        "title": "accelerometer",
+        "Value": "0.0,0.0,0.0",
+        "info": {
+            "qos": 0,
+            "timestamp": 1565049357861,
+            "topic": "cmpe220"
+            
+        }
+    }
+]
+

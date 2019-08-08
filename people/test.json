@@ -1,0 +1,12 @@
+{
+    "format": "json",
+    "payload": {
+      "status": "0.0,0.0,0.0",
+      "devicename": "ST-1",
+      "tag": "accelerometer",
+      "device_id": "54:6c:0e:46:44:84"
+    },
+    "qos": 0,
+    "timestamp": 1565049357861,
+    "topic": "cmpe220"
+  }
