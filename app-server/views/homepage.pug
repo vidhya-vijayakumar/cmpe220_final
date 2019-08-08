@@ -1,0 +1,11 @@
+extends layout
+
+block append head
+  link(rel='stylesheet' href='/css/homepage.css')
+  link(rel='stylesheet' href='/css/jquery-ui.css')
+  link(rel='stylesheet' href='/css/jquery-ui.theme.css')
+  
+block append body
+  h1 #{title}
+  canvas#canvas(width='200', height='200')
+  script(src='/js/homepage.js')
